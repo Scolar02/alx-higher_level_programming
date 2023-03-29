@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-return matching states
+return matching states; safe from MySQL injections
+# http://bobby-tables.com/python
 parameters given to script: username, password, database, state to match
 """
 
@@ -20,10 +21,10 @@ if __name__ == "__main__":
     cursor = db.cursor()
     sql_cmd = """SELECT *
                  FROM states
-                 WHERE name LIKE '{:s}' ORDER BY id ASC""".format(argv[4])
-    cursor.execute(sql_cmd)
+                 WHERE name=%s ORDER BY id ASC"""
+    cursor.execute(sql_cmd, (argv[4],))
+
     for row in cursor.fetchall():
-        if row[1] == argv[4]:
-            print(row)
+        print(row)
     cursor.close()
     db.close()

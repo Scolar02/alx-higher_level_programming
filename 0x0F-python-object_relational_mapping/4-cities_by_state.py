@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-return matching states
-parameters given to script: username, password, database, state to match
+return info from both tables (tables 'cities' 'states)
+parameters given to script: username, password, database
 """
 
 import MySQLdb
@@ -16,14 +16,15 @@ if __name__ == "__main__":
                          passwd=argv[2],
                          db=argv[3])
 
-    # create cursor to exec queries using SQL; match arg given
+    # create cursor to exec queries using SQL; join two tables for all info
     cursor = db.cursor()
-    sql_cmd = """SELECT *
+    sql_cmd = """SELECT cities.id, cities.name, states.name
                  FROM states
-                 WHERE name LIKE '{:s}' ORDER BY id ASC""".format(argv[4])
+                 INNER JOIN cities ON states.id = cities.state_id
+                 ORDER BY cities.id ASC"""
     cursor.execute(sql_cmd)
+
     for row in cursor.fetchall():
-        if row[1] == argv[4]:
-            print(row)
+        print(row)
     cursor.close()
     db.close()
