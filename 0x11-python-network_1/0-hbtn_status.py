@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-fetch https://alx-intranet.hbtn.io/status
+fetch https://alx-intranet.hbtn.io/status; display response
 """
 
 import urllib.request
