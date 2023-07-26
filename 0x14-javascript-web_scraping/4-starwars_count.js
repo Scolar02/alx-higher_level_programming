@@ -13,12 +13,12 @@ request(url, function (err, response, body) {
       const chars = films[i].characters;
       for (const c in chars) {
         if (chars[c].includes('18')) {
-	  count++;
+          count++;
         }
       }
     }
     console.log(count);
   } else {
-    console.log('Erorr Code:' + response.statusCode);
+    console.log('Error Code: ' + response.statusCode);
   }
 });
