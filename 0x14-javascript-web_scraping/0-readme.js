@@ -7,7 +7,7 @@ if (process.argv.length < 3) {
   process.exit(1);
 }
 
-let filename = process.argv[2];
+const filename = process.argv[2];
 
 fs.readFile(filename, 'utf8', function (err, data) {
   if (err) {
